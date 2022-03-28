@@ -1,17 +1,16 @@
 package com.automation.webpages;
 
+import com.qa.Base.BasePage;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class HomePage {
-    private WebDriver driver;
-
-    //Page URL
-    private static String PAGE_URL="https://www.automationpractice.com";
-
+public class HomePage extends BasePage {
+    //private WebDriver driver;
     //Locators
     // Search Text Box
     @FindBy(how=How.ID,using="search_query_top")
@@ -26,14 +25,15 @@ public class HomePage {
     //Constructor
     public HomePage(WebDriver driver){
         this.driver=driver;
-        driver.get(PAGE_URL);
         PageFactory.initElements(driver,this);
     }
 
+    @Step("Typing Search criteria")
     public void enterSearchCriteria(){
         searchTextBox.sendKeys("dress");
     }
 
+    @Step("Search now")
     public void clickOnSearchIcon(){
         searchButton.click();
     }

@@ -1,25 +1,30 @@
 package com.automation.tests;
 
 import com.automation.webpages.*;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+
+import com.qa.Base.BasePage;
+import com.qa.listeners.TestAllureListener;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.*;
 
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+@Listeners({TestAllureListener.class})
 public class BuyItemTest {
-    WebDriver driver;
+    public WebDriver driver;
+    public BasePage basePage;
 
-    @Before
+
+
+    @BeforeMethod
     public void setup(){
-        System.setProperty("webdriver.chrome.driver", "D:\\chromeWebDriver\\chromedriver.exe");
-        driver=new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        basePage = new BasePage();
+        driver = basePage.initialize_driver();
+
     }
 
     /*public void createAccount(HomePage home){
@@ -30,7 +35,7 @@ public class BuyItemTest {
         Assert.assertTrue(signInPage.isSignInPageOpened());
     }*/
 
-    @Test
+    @Test(priority = 1)
     public void buyItem(){
         //Create object of HomePage Class
         HomePage home=new HomePage(driver);
@@ -76,9 +81,9 @@ public class BuyItemTest {
 
     }
 
-    @After
+    @AfterMethod
     public void close(){
-        driver.close();
+        driver.quit();
     }
 
 }

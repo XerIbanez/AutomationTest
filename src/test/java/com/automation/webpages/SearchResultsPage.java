@@ -1,5 +1,6 @@
 package com.automation.webpages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -39,9 +40,9 @@ public class SearchResultsPage {
         //Initialize Elements
         PageFactory.initElements(driver,this);
     }
-
+    @Step("Verifying if Results Page is displayed")
     public boolean isPageOpened(){
-        return resultsFound.getText().toString().contains("7 results have been found.");
+        return resultsFound.getText().toString().contains("7 results have been found.123456");
     }
 
     /*public void sortResultsLowestFirst(){
@@ -53,16 +54,17 @@ public class SearchResultsPage {
         }
 
     }*/
+    @Step("Sorting Results by Lowest First")
     public void sortResultsLowestFirst(){
         sortResults.click();
         selectOptionLowerFirst.click();
     }
-
+    @Step("Adding item to Cart")
     public void addFirstItemToCart(){
 
         addItemToCart.click();
     }
-
+    @Step("Click on Checkout Button")
     public void clickOnCheckoutButton(){
         checkOutButton.click();
     }
